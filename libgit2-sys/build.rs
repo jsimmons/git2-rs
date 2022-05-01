@@ -151,6 +151,7 @@ fn main() {
             features.push_str("#define GIT_SECURE_TRANSPORT 1\n");
         } else {
             features.push_str("#define GIT_OPENSSL 1\n");
+            features.push_str("#define GIT_OPENSSL_DYNAMIC 1\n");
             if let Some(path) = env::var_os("DEP_OPENSSL_INCLUDE") {
                 cfg.include(path);
             }

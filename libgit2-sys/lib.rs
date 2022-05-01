@@ -4113,7 +4113,6 @@ pub fn init() {
 
     static INIT: Once = Once::new();
     INIT.call_once(|| unsafe {
-        openssl_init();
         ssh_init();
         let rc = git_libgit2_init();
         if rc >= 0 {
@@ -4136,16 +4135,6 @@ pub fn init() {
         );
     });
 }
-
-#[cfg(all(unix, feature = "https"))]
-#[doc(hidden)]
-pub fn openssl_init() {
-    openssl_sys::init();
-}
-
-#[cfg(any(windows, not(feature = "https")))]
-#[doc(hidden)]
-pub fn openssl_init() {}
 
 #[cfg(feature = "ssh")]
 fn ssh_init() {
